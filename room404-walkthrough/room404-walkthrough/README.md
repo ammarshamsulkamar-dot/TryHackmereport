@@ -1,8 +1,8 @@
 # TryHackMe — Room 404 Walkthrough
 
-**Student:** _<Muhammad Ammar Yaasir Bin Shamsul Kamar>_
-**Student ID:** _<52215226094>_
-**Course:** _< Vulnerability Analysis/ lab>_ — Lab 5
+**Student:** Muhammad Ammar Yaasir Bin Shamsul Kamar
+**Student ID:** 52215226094
+**Course:** Vulnerability Analysis/ lab — Lab 5
 **Date:** 22 November 2026
 **Room:** [Room 404 — TryHackMe](https://tryhackme.com/room/) (Hacker Holidays 2026, Day 2)
 
