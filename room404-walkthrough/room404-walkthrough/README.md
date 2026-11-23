@@ -1,8 +1,8 @@
 # TryHackMe — Room 404 Walkthrough
 
-**Student:** _<your name>_
-**Student ID:** _<your ID>_
-**Course:** _<course code / lab>_ — Lab 5
+**Student:** _<Muhammad Ammar Yaasir Bin Shamsul Kamar>_
+**Student ID:** _<52215226094>_
+**Course:** _< Vulnerability Analysis/ lab>_ — Lab 5
 **Date:** 22 November 2026
 **Room:** [Room 404 — TryHackMe](https://tryhackme.com/room/) (Hacker Holidays 2026, Day 2)
 
@@ -64,7 +64,7 @@ Two ports open:
 8080/tcp open  http-proxy Werkzeug/3.0.1 Python/3.12.3
 ```
 
-`Werkzeug` is the development server that ships with **Flask**, so the target is a Python web app. That matters because Flask serves *routes* defined in code, not files on disk — so hidden content is found by fuzzing route names.
+`Werkzeug` is the development server that ships with Flask, so the target is a Python web app. That matters because Flask serves *routes* defined in code, not files on disk so hidden content is found by fuzzing route names.
 
 ![nmap scan](images/01-nmap.png)
 
@@ -160,16 +160,3 @@ THM{byt3_l0tus_n3v3r_f0rg3ts}
 The name is a pun: **git never forgets**. The developer left a secret in a file and committed it — even if they had deleted it from the live site, the value would still live in the commit history. That is exactly why exposing `.git/` is so dangerous.
 
 ---
-
-## 6. Remediation
-
-- **Never deploy the `.git/` directory to production.** Block any path containing `.git` at the web-server level, or don't copy it during deployment.
-- **Don't run the Flask/Werkzeug development server in production** — use a proper WSGI server (gunicorn/uWSGI) behind a reverse proxy.
-- **Never commit secrets.** If one is committed, rotate it and scrub the history — deleting the file is not enough, because the value remains in old commits.
-- Add secret-scanning (git hooks / CI checks) to catch credentials before they're committed.
-
----
-
-## 7. What I Learned
-
-Recon pays off: the room told me where to look, but the real win came from not trusting the front page and fuzzing for what wasn't linked. An exposed `.git/` directory is a small misconfiguration that leaks the entire source code and every secret ever committed. I also learned to adapt when a tool wasn't available — the AttackBox had no internet, so I reconstructed the repo with native `git` instead of relying on `git-dumper`.
